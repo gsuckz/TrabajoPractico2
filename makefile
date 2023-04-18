@@ -27,5 +27,5 @@ clean: $(OUT_DIR)
 all: $(OBJ_FILES) $(BIN_DIR)
 	gcc -o $(BIN_DIR)/app.elf $(OBJ_FILES)
 	
-doc: build/doc
+doc: 
 	doxygen Doxyfile
