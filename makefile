@@ -1,11 +1,23 @@
-SRC_DIR = ./source
-OBJ_DIR = ./build
-SRC_FILES = $(wildcard $(SRC:DIR)/*.c)
-OBJ_FILES = $(patsubst $(SRC_DIR)%.c,
-			$(OBJ_DIR)%.o,$(SRC_FILES))
+SRC_DIR = ./src
+OUT_DIR = ./build
+OBJ_DIR = $(OUT_DIR)/obj
+BIN_DIR = $(OUT_DIR)/bin 
 
-all: $(OBJ_FILES)
-	gcc $(OBJ_FILES) -o $(OBJ_DIR)/app.out
+SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC_FILES))
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/.%c
-	gcc -c $< -o $@
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(OBJ_FILES)
+	gcc -c $< -o $@ -I src
+
+$(OUT_DIR):
+	mkdir $(OUT_DIR)
+
+$(OBJ_DIR) : $(OUT_DIR)
+	mkdir $(OBJ_DIR)
+
+$(BIN_DIR) : $(OUT_DIR)
+	mkdir $(BIN_DIR)
+all: $(OBJ_FILES) $(BIN_DIR)
+	gcc -o $(BIN_DIR)/app.elf $(OBJ_FILES)
+doc:
+	doxygen Doxyfile
