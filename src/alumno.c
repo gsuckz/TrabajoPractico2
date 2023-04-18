@@ -1,8 +1,19 @@
 #include "Alumno.h"
 #include <stdio.h>
+/// @brief 
+/// Modulo Alumno con la funcion Serializar
+/// @return 
 
 static int SerializarCadena();
+/// @brief 
+/// Funcion para Imprimir Cadenas
+/// @return 
+
 static int SerializarNumero();
+/// @brief 
+/// Funcion para Imprimir Numeros
+/// @return 
+
 
 static int SerializarCadena(const char * campo,const char * valor, char * cadena, int espacio){
     return snprintf(cadena, espacio, "\"%s\":\"%s\",", campo, valor);
